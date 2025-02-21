@@ -77,7 +77,7 @@ summarize_wqp_data_by_year <- function(wqp_data_refined) {
     )
 }
 
-#' @title Isolate just the site metadata from the full dataset
+#' @title Filter metadata to just the sites that stay in the refined data
 #' @description WQP downloaded data via `dataRetrieval` comes with a data.frame
 #' attribute called `siteInfo`, containing metadata for the sites present in the 
 #' downloaded dataset. It includes things like site type, site full name, and 
@@ -85,15 +85,10 @@ summarize_wqp_data_by_year <- function(wqp_data_refined) {
 #' in `refine_wqp_data()`, will *not* filter the siteInfo attribute unless 
 #' specifically added as custom code.
 #' 
-#' @param wqp_data_raw a data.frame with downloaded data from WQP, such as from
-#' the pipeline function `download_wqp_physchem_data()`.
+#' @param wqp_metadata a data.frame with downloaded data from WQP with site info
 #' @param sites a vector of the sites to retain
 #' 
-extract_wqp_site_info <- function(wqp_data_raw, sites) {
-  attr(wqp_data_raw, "siteInfo") |>
-    select(MonitoringLocationIdentifier, MonitoringLocationName,
-           LatitudeMeasure, LongitudeMeasure) %>% 
-    # Filter to just the sites that stay in the refined data
-    # (the cleaning steps do not impact `siteInfo` attribute)
+filter_wqp_site_info <- function(wqp_metadata, sites) {
+  wqp_metadata %>% 
     filter(MonitoringLocationIdentifier %in% sites)
 }

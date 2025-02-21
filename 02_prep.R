@@ -10,7 +10,9 @@ p2 <- list(
   # columns using a custom fxn defined in `02_prep/src/process_wqp_data.R`
   tar_target(
     p2_refined_dataset,
-    refine_wqp_data(p1_dataset, characteristic, fraction)
+    # Could also use "Total" as the fraction, but note that Nitrate doesn't 
+    # have any values for that fraction in this dataset
+    refine_wqp_data(p1_dataset, characteristic, "Dissolved")
   ),
   
   # Get list of site IDs that appear in the refined data
@@ -25,9 +27,9 @@ p2 <- list(
     summarize_wqp_data_by_site(p2_refined_dataset)
   ),
   
-  # Extract the site metadata from the refined dataset
+  # Filter the site metadata from the refined dataset
   tar_target(
     p2_site_metadata,
-    extract_wqp_site_info(p1_dataset, p2_sites)
+    filter_wqp_site_info(p1_metadata, p2_sites)
   )
 )

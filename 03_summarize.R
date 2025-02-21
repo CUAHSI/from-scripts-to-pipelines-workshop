@@ -7,6 +7,9 @@ source('03_summarize/src/map_function.R')
 
 p3 <- list(
   
+  # File targets *must* return the filepath at the end, so the functions called
+  # by file targets should have `return(out_file)` as the final step.
+  
   # next can add a timeseries plot for the data by year and then maybe an accompanying map?
   # would love to create a very simple shiny app for this.
   tar_target(
