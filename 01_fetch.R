@@ -15,7 +15,7 @@ p1 <- list(
                                  start_date=start_date,
                                  end_date=end_date)
   ),
-  
+
   tar_target(
     p1_nws_table,
     download_nws_conversion()

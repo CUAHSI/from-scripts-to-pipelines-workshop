@@ -22,6 +22,7 @@
 _targets/
 # Ignore gemini generated files
 */src/gemini_generated_files/*
+# Ignore files in out and tmp folders
 */out/*
 !*.placeholder
 */tmp/*
