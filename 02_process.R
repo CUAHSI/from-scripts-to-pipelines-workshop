@@ -7,7 +7,8 @@ p2 <- list(
     p2_harvey_line_files,
     extract_files_from_zip(p1_harvey_best_track_zip,
                            out_dir="02_process/out",
-                           file_name_regex=".pts")
+                           file_name_regex=".pts"),
+    format='file'
   ),
   
   tar_target(
