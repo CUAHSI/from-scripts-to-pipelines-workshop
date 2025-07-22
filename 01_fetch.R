@@ -1,29 +1,60 @@
-
-# This file includes the target recipes for targets that download data
-
-# Load all `src` files for this phase
-source('01_fetch/src/download_wqp_physchem_data.R')
+source('01_fetch/src/download_nwis_stage_data.R')
+source('01_fetch/src/download_nhc_best_track.R')
+source('01_fetch/src/download_nws_conversion.R')
+source('01_fetch/src/download_nws_data.R')
+source("01_fetch/src/download_nwis_site_info.R")
 
 p1 <- list(
-  
-  # Fetch data from the portal using a function defined in the pipeline
   tar_target(
-    p1_dataset,
-    download_wqp_physchem_data(state = state,
-                               county = county,
-                               start_date = start_date,
-                               end_date = end_date)
-    ),
+    p1_site_data,
+    download_nwis_stage_data(sites=harvey_sites,
+                             start_date=start_date,
+                             end_date=end_date)
+  ),
   
-  # Save raw data as a csv to be able to share outside of the pipeline.
-  # Note that target name is the same as the data *except* for the 
-  # suffix `_csv`, denoting the file type.
-  tar_target(p1_dataset_csv, {
-    out_file <- "01_fetch/out/p1_data_file.csv"
-    write_csv(p1_dataset, out_file)
-    return(out_file) # File targets *must* return the filepath at the end
-  }, 
-  format = "file"
+  tar_target(
+    p1_site_data_csv,{
+      file_out <- "01_fetch/out/nwis_site_data.csv"
+      write_csv(p1_site_data, file_out)
+      return(file_out)
+    },
+    format='file'
+  ),
+  
+  tar_target(
+    p1_nws_table,
+    download_nws_conversion()
+  ),
+  
+  tar_target(
+    p1_nws_flooding_info,
+    download_nws_data(p1_nws_table,sites=harvey_sites)
+  ), 
+  
+  tar_target(
+    p1_harvey_best_track_id,
+    paste0(ocean,storm_num,year)
+  ),
+  
+  tar_target(
+    p1_harvey_best_track_zip,
+    download_nhc_best_track(storm_id=p1_harvey_best_track_id),
+    format = "file"
+    
+  ),
+    
+  tar_target(
+    p1_site_info,
+    download_nwis_site_info(p1_site_data)
+  ),
+  
+  tar_target(
+    p1_site_info_csv,
+    {
+      file_out <- "01_fetch/out/nwis_site_info.csv"
+      write_csv(p1_site_info, file_out)
+      return(file_out)
+    },
+    format='file'
   )
-  
 )

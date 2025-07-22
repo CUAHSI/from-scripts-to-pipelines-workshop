@@ -3,30 +3,32 @@ library(targets)
 
 tar_option_set(
   packages = c(
-    'dplyr',
-    'ggplot2',
-    'dataRetrieval', # may comment out for actual workshop
-    'readr',
-    'lubridate',
+    'tidyverse',
+    'dataRetrieval',
+    'httr2',
+    'tools',
+    'sf',
+    'xml2',
     'leaflet',
+    'RColorBrewer',
     'htmlwidgets',
-    'scales'
+    'tigris'
   )
 )
 
 # Set 01_fetch pipeline configurations
-start_date <- "2020-10-01" # Date samples begin
-end_date <- "2023-09-30" # Date samples end
-state <- 'Wisconsin'
-county <- 'Brown'
-
-# Set 02_prep pipeline configurations
-characteristic <- "Chloride" # Phosphorus, Nitrate
-fraction <- "Dissolved"
+# site and date inputs
+harvey_sites <- c('08211520','08188500','08030500','08162000','08014800')
+start_date <- "2017-08-25" # Date samples begin
+end_date <- "2017-09-12" # Date samples end
+# storm inputs
+ocean <- "al"
+storm_num <- "09"
+year <- "2017"
 
 source('01_fetch.R')
-source('02_prep.R')
-source('03_summarize.R')
+source('02_process.R')
+source('03_visualize.R')
 
 # Combine all targets from each phase recipe
-c(p1, p2, p3)
+c(p1,p2,p3)
