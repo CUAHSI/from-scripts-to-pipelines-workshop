@@ -1,8 +1,8 @@
-
 source('01_fetch/src/download_nwis_stage_data.R')
 source('01_fetch/src/download_nhc_best_track.R')
 source('01_fetch/src/download_nws_conversion.R')
 source('01_fetch/src/download_nws_data.R')
+source("01_fetch/src/download_nwis_site_info.R")
 
 p1 <- list(
   tar_target(
@@ -41,5 +41,20 @@ p1 <- list(
     download_nhc_best_track(storm_id=p1_harvey_best_track_id),
     format = "file"
     
+  ),
+    
+  tar_target(
+    p1_site_info,
+    download_nwis_site_info(p1_site_data)
+  ),
+  
+  tar_target(
+    p1_site_info_csv,
+    {
+      file_out <- "01_fetch/out/nwis_site_info.csv"
+      write_csv(p1_site_info, file_out)
+      return(file_out)
+    },
+    format='file'
   )
 )

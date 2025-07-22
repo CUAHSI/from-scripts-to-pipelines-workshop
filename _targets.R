@@ -27,9 +27,8 @@ storm_num <- "09"
 year <- "2017"
 
 source('01_fetch.R')
-source('02_read.R')
-source('03_process.R')
-source('04_visualize.R')
+source('02_process.R')
+source('03_visualize.R')
 
 # Combine all targets from each phase recipe
-c(p1,p2,p3,p4)
+c(p1,p2,p3)
