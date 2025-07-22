@@ -21,8 +21,8 @@ plot_hydrographs <- function(nwis_nws_data,out_file){
       y = "Gage height, feet"
     ) +
     scale_x_date(date_labels = "%d-%b-%Y") +
-    # Use a minimal theme for a clean look
-    theme_minimal() +
+    # Use bw theme (so the x and y axes still show up)
+    theme_bw() +
     # Customize theme elements
     theme(
       strip.text = element_text(face = "bold", size = 10),
