@@ -102,9 +102,7 @@ create_map <- function(harvey_data, site_info, out_file) {
   # add custom legend for usgs gage sites
   m <- add_gage_site_legend(m, color = usgs_gage_color, label = "USGS Gage Sites", position = "bottomright")
   
-  saveWidget(m, file = basename(out_file), selfcontained = TRUE)
-  file.copy(basename(out_file), out_file, overwrite = TRUE)
-  file.remove(basename(out_file))
+  saveWidget(m, file = out_file, selfcontained = TRUE)
   
   return(out_file)
 }
