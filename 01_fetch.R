@@ -12,15 +12,15 @@ p1 <- list(
   tar_target(
     p1_site_data,
     download_nwis_stage_data(sites=harvey_sites,
-                                 start_date=start_date,
-                                 end_date=end_date)
+                             start_date=start_date,
+                             end_date=end_date)
   ),
-
+  
   tar_target(
     p1_nws_table,
     download_nws_conversion()
   ),
-
+  
   tar_target(
     p1_nws_flooding_info,
     download_nws_data(p1_nws_table,sites=harvey_sites)
