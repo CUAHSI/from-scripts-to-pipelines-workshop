@@ -17,6 +17,15 @@ p1 <- list(
   ),
   
   tar_target(
+    p1_site_data_csv,{
+      file_out <- "01_fetch/out/nwis_site_data.csv"
+      write_csv(p1_site_data, file_out)
+      return(file_out)
+    },
+    format='file'
+  ),
+  
+  tar_target(
     p1_nws_table,
     download_nws_conversion()
   ),

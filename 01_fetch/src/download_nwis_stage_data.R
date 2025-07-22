@@ -7,12 +7,10 @@ download_nwis_stage_data <- function(sites,start_date,end_date,parameterCd="0006
   for (site in sites){
     
     file_out <- file.path("01_fetch/out", paste0('nwis_', site, '_data.csv'))
+    site_data <- download_nwis_site_data(file_out,start_date,end_date,parameterCd)
     
-    these_data <- download_nwis_site_data(file_out,start_date,end_date,parameterCd)
-    write_csv(these_data, file = file_out)
     # read the downloaded data and append it to the existing data.frame
-    # these_data <- read_csv(download_file, col_types = 'ccTdcc')
-    data_out <- bind_rows(data_out, these_data)
+    data_out <- bind_rows(data_out, site_data)
   }
   return(data_out)
 }
