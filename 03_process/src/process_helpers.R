@@ -1,6 +1,4 @@
-load_sf_data <- function(storm_id,start_date,end_date,in_folder,out_file) {
-  
-  sf_fp = paste0(in_folder,"/",storm_id,"_pts.shp")
+load_sf_data <- function(sf_fp,start_date,end_date,out_file) {
   
   sf_data <- st_read(sf_fp) %>% 
     st_transform(crs=3857) %>%

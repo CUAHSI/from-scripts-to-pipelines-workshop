@@ -6,6 +6,7 @@ tar_option_set(
     'tidyverse',
     'dataRetrieval',
     'httr2',
+    'tools',
     'sf',
     'xml2',
     'leaflet',

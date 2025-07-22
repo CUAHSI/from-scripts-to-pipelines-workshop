@@ -5,10 +5,9 @@ source("03_process/src/process_helpers.R")
 p3 <- list(
   tar_target(
     p3_harvey_pts,
-    load_sf_data(p1_harvey_best_track_id,
+    load_sf_data(p2_harvey_line_shp,
                  start_date,
                  end_date,
-                 in_folder="02_read/out",
                  out_file="03_process/out/harvey_tracking.csv")
   ),
   
