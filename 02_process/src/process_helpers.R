@@ -26,7 +26,7 @@ extract_files_from_zip <- function(zip_file, out_dir, file_name_regex) {
 }
 
 
-load_sf_data <- function(sf_fp,start_date,end_date,out_file) {
+load_sf_data <- function(sf_fp,start_date,end_date) {
   
   sf_data <- st_read(sf_fp) %>% 
     st_transform(crs=3857) %>%
