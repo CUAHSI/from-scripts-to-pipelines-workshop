@@ -9,8 +9,6 @@ load_sf_data <- function(sf_fp,start_date,end_date,out_file) {
     filter(Date>=start_date,
            Date<=end_date)
   
-  write_csv(sf_data,out_file)
-  
   return(sf_data)
   
 }
