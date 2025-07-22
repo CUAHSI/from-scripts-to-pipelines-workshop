@@ -1,8 +1,4 @@
 
-# This file includes the target recipes for targets that download data
-
-# Load all `src` files for this phase
-# source('01_fetch/src/?????.R')
 source('01_fetch/src/download_nwis_stage_data.R')
 source('01_fetch/src/download_nhc_best_track.R')
 source('01_fetch/src/download_nws_conversion.R')

@@ -1,6 +1,3 @@
-# This file includes the target recipes for targets that clean and prepare data.
-
-# Load all `src` files for this phase
 source("02_read/src/read_nwis_site_info.R")
 source("02_read/src/read_helpers.R")
 

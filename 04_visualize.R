@@ -1,8 +1,3 @@
-
-# This file includes the target recipes for targets that summarize and visualize data
-
-# Load all `src` files for this phase
-# source('03_summarize/src/?????.R')
 source('04_visualize/src/visualize_harvey_map.R')
 source('04_visualize/src/visualize_hydrographs.R')
 
