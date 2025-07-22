@@ -6,8 +6,7 @@ download_nwis_stage_data <- function(sites,start_date,end_date,parameterCd="0006
   # loop through sites to download 
   for (site in sites){
     
-    file_out <- file.path("01_fetch/out", paste0('nwis_', site, '_data.csv'))
-    site_data <- download_nwis_site_data(file_out,start_date,end_date,parameterCd)
+    site_data <- download_nwis_site_data(site,start_date,end_date,parameterCd)
     
     # read the downloaded data and append it to the existing data.frame
     data_out <- bind_rows(data_out, site_data)
@@ -16,12 +15,7 @@ download_nwis_stage_data <- function(sites,start_date,end_date,parameterCd="0006
 }
   
 
-download_nwis_site_data <- function(filepath, start_date, end_date, parameterCd){
-  
-  # filepaths look something like directory/nwis_01432160_data.csv,
-  # remove the directory with basename() and extract the 01432160 with the regular expression match
-  site_num <- basename(filepath) %>% 
-    stringr::str_extract(pattern = "(?:[0-9]+)")
+download_nwis_site_data <- function(site_num, start_date, end_date, parameterCd){
   
   # readNWISdata is from the dataRetrieval package
   data_out <- readNWISdv(
