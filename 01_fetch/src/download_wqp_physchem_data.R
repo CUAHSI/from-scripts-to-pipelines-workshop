@@ -13,14 +13,19 @@
 #' expects the string to be formatted as `YYYY-MM-DD`
 #' 
 download_wqp_physchem_data <- function(state, county, start_date, end_date) {
-  readWQPdata(service = "Result", # This is currently set to WQX legacy
-              profile = "resultPhysChem",
-              sampleMedia = c('water', 'Water'),
-              characteristicName = c('Chloride', 
-                                     'Phosphorus', 
-                                     'Nitrate'), 
-              statecode = state,
-              countycode = county,
-              startDateLo = start_date,
-              startDateHi = end_date)
+  wqp_data <- readWQPdata(service = "Result", # This is currently set to WQX legacy
+                          profile = "resultPhysChem",
+                          sampleMedia = c('water', 'Water'),
+                          characteristicName = c('Chloride', 
+                                                 'Phosphorus', 
+                                                 'Nitrate'), 
+                          statecode = state,
+                          countycode = county,
+                          startDateLo = start_date,
+                          startDateHi = end_date)
+  if(length(wqp_data$MonitoringLocationIdentifier) == 0) {
+    stop('No data returned. Choose a new location.')
+  } else {
+    return(wqp_data) 
+  }
 }
